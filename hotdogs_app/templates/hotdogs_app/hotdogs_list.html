@@ -1,0 +1,43 @@
+{% extends 'main_template.html' %}
+{% block title %}
+	HotDogs
+{% endblock %}
+
+{% block content %}
+	{% for hot_dog in hot_dogs %}
+	<div class="jumbotron">
+	  <h1 class="display-4">{{hot_dog.title}}</h1>
+	  <p class="lead">{{hot_dog.description}}</p>
+	  <hr class="my-4">
+	  {% if hot_dog.image %}
+			<img src="{{hot_dog.image.url}}" alt="hot-dog image" height="150" width="150">
+		{% else %}
+		{% load static %}
+			<img src="{% static 'images/default.jpg' %}" alt="Default photo" height="150" width="150">
+		
+		{% endif %}
+		<br><br>
+	  
+	  <a class="btn btn-primary btn-lg" href="{% url 'hotdog_detail_url' id=hot_dog.id %}" role="button">Detail</a>
+	  <a class="btn btn-warning btn-lg" href="{% url 'hotdog_update_url' id=hot_dog.id %}" role="button">Edit</a>
+	  <a class="btn btn-danger btn-lg" href="{% url 'hotdog_delete_url' id=hot_dog.id %}" role="button">Delete</a>
+
+	</div>
+	{% endfor %}
+
+
+	<!-- {% for hot_dog in hot_dogs %}
+		<div style="border:1px solid black">
+			<h3><a href="{% url 'hotdog_detail_url' id=hot_dog.id %}">{{hot_dog.title}}</a></h3>
+			<p>{{hot_dog.description}}</p>
+			{% if hot_dog.image %}
+				<img src="{{hot_dog.image.url}}" alt="hot-dog image" height="150" width="150">
+			{% else %}
+			{% load static %}
+				<img src="{% static 'images/default.jpg' %}" alt="Default photo" height="150" width="150">
+			
+			{% endif %}
+		</div>
+		<br><br>
+	{% endfor %} -->
+{% endblock %}

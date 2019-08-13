@@ -1,0 +1,31 @@
+{% extends 'main_template.html' %}
+{% block title %}
+	Create HotDog
+{% endblock %}
+
+{% block content %}
+	{% if error_message %}
+	<p><strong>{{error_message}}</strong></p>
+	{% endif %}
+
+	<form action="{% url 'hotdog_create_url' %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% for field in form %}
+		<div class="form-group">
+			{% if field.errors %}
+			<div class="alert alert-danger">
+				{{ field.errors }}
+			</div>
+			{% endif %}
+			{{ field.label }}:
+			<br>
+			{{ field }}
+		</div>
+	{% endfor %}
+	<button type="submit" class="btn btn-primary">Create HotDog</button> 
+		
+
+	</form>
+
+{% endblock %}
+

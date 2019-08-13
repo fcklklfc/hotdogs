@@ -1,0 +1,14 @@
+{% extends 'main_template.html' %}
+
+{% block title %}
+	Delete Tag - "{{ tag.title|title }}" - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'hotdog_delete_url' id=hotdog.id %}" method="post">
+	{% csrf_token %}
+	<h2>Are you sure you want to delete <b>{{ hotdog.title }}</b> ?</h2>
+	<a href="{% url 'hot_dogs_list' %}">Cancel</a><br>
+	<button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}

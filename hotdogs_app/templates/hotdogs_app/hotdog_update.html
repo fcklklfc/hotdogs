@@ -1,0 +1,26 @@
+{% extends 'main_template.html' %}
+
+{% block title %}
+	Edit HotDog "{{hotdog.title|title}}"  
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'hotdog_update_url' id=hotdog.id %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{% for field in form %}
+		<div class="form-group">
+			{% if field.errors %}
+			<div class="alert alert-danger">
+				{{ field.errors }}
+			</div>
+			{% endif %}
+			{{ field.label }}
+			<br>
+			{{ field }}
+		</div>
+	{% endfor %}
+	<button type="submit" class="btn btn-warning">Update HotDog</button> 
+	
+</form>
+{% endblock %}
